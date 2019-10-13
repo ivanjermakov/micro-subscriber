@@ -1,0 +1,17 @@
+language: java
+sudo: false
+jdk:
+  - openjdk8
+env:
+  - COVERALLS_REPO_TOKEN=Ey9xaNRPkWCBIh2ijmye5GX3PlXKbaQkU
+before_cache:
+  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+cache:
+  directories:
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
+script:
+  - gradle test
+after_success:
+  - gradle jacocoTestReport coveralls
