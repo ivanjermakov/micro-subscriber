@@ -1,5 +1,8 @@
 package com.github.ivanjermakov.microsubscriber.annotation;
 
+import com.github.ivanjermakov.microsubscriber.builder.DefaultSubscriptionBuilder;
+import com.github.ivanjermakov.microsubscriber.builder.SubscriptionBuilder;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -14,5 +17,7 @@ public @interface Subscribe {
 	String uri();
 
 	Class<?> responseType();
+
+	Class<? extends SubscriptionBuilder> builderClass() default DefaultSubscriptionBuilder.class;
 
 }
