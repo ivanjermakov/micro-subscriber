@@ -1,4 +1,4 @@
-package com.github.ivanjermakov.microsubscriber;
+package com.github.ivanjermakov.microsubscriber.unit;
 
 import com.github.ivanjermakov.microsubscriber.annotation.Subscribe;
 import com.github.ivanjermakov.microsubscriber.builder.SubscriptionBuilder;
@@ -21,10 +21,10 @@ import static org.junit.Assert.assertNotNull;
 })
 public class SubscriptionInjectorUnitTest {
 
-	private static class ExampleBuilder implements SubscriptionBuilder {
+	private static class FakeBuilder implements SubscriptionBuilder<Object> {
 		@Override
-		public Flux build(Subscribe subscribe) {
-			return Flux.empty();
+		public Flux<Object> build(Subscribe subscribe) {
+			return Flux.just(new Object());
 		}
 	}
 
@@ -40,11 +40,12 @@ public class SubscriptionInjectorUnitTest {
 	public void shouldInitializePublicField() {
 
 		class ExampleBean {
+
 			@Subscribe(
 					baseUrl = "",
 					uri = "",
 					responseType = Object.class,
-					builderClass = ExampleBuilder.class
+					builderClass = FakeBuilder.class
 			)
 			public Flux f;
 		}
@@ -63,7 +64,7 @@ public class SubscriptionInjectorUnitTest {
 					baseUrl = "",
 					uri = "",
 					responseType = Object.class,
-					builderClass = ExampleBuilder.class
+					builderClass = FakeBuilder.class
 			)
 			private Flux f;
 		}
