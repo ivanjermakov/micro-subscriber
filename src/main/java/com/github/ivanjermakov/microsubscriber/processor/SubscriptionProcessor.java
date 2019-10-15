@@ -2,6 +2,7 @@ package com.github.ivanjermakov.microsubscriber.processor;
 
 import com.github.ivanjermakov.microsubscriber.injector.SubscriptionInjector;
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.stereotype.Component;
 
@@ -10,6 +11,7 @@ public class SubscriptionProcessor implements BeanPostProcessor {
 
 	private final SubscriptionInjector subscriptionInjector;
 
+	@Autowired
 	public SubscriptionProcessor(SubscriptionInjector subscriptionInjector) {
 		this.subscriptionInjector = subscriptionInjector;
 	}
